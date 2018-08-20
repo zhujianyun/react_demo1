@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习react</title>
+</head>
+
+<body>
+    <div id="demo1"></div>
+    <div id="app"></div>
+    <script src="bower_components/react/react.development.js"></script>
+    <script src="bower_components/react/react-dom.development.js"></script>
+    <script src="bower_components/babel/browser.js"></script>
+    <script type="text/babel">
+
+        function Clock(props) {
+            return (
+                <div>
+                    <h1>hello world</h1>
+                    <p>现在是{props.date.toLocaleTimeString()}</p>
+                </div>
+            );
+        }
+ 
+        ReactDOM.render(
+            <Clock date={new Date()} />,
+            document.getElementById('demo1'),
+            function() {
+                console.log('demo1渲染完毕');
+            }
+        );
+        class Hello extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <h1>hello world this is H1</h1>
+                        <h2>计算{this.props.a}*{this.props.b}={this.props.a * this.props.b}</h2>
+                        {/**在 JSX 中不能使用 if else 语句，但可以使用 conditional (三元运算) 表达式来替代**/}
+                        <h3>{this.props.a >= this.props.b ? 'true' : 'false'}</h3>
+                        <h4>hello world this is H4</h4>
+                        <p>It's {this.props.date.toLocaleTimeString()}</p>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Hello date={new Date()} a="2" b="10" />,
+            document.getElementById('app'),
+            function() {
+                console.log('hello 渲染完成了');
+            }
+        );
+    </script>
+</body>
+
+</html>
