@@ -30,16 +30,30 @@
                 console.log('demo1渲染完毕');
             }
         );
+
+        let demoStyle = {
+            fontSize: 12,
+            color: 'red'
+        };
+
+        let arr = [
+            <li>this is li1</li>,
+            <li>this is li2</li>,
+            <li>this is li3</li>
+        ];
         class Hello extends React.Component {
             render() {
                 return (
                     <div>
-                        <h1>hello world this is H1</h1>
+                        <h1 style={demoStyle}>hello world this is H1</h1>
                         <h2>计算{this.props.a}*{this.props.b}={this.props.a * this.props.b}</h2>
-                        {/**在 JSX 中不能使用 if else 语句，但可以使用 conditional (三元运算) 表达式来替代**/}
+                        {/*在 JSX 中不能使用 if else 语句，但可以使用 conditional (三元运算) 表达式来替代*/}
                         <h3>{this.props.a >= this.props.b ? 'true' : 'false'}</h3>
                         <h4>hello world this is H4</h4>
                         <p>It's {this.props.date.toLocaleTimeString()}</p>
+                        <ul>
+                            {arr}
+                        </ul>
                     </div>
                 )
             }
