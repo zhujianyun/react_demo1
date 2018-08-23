@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习react2——JSX</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="bower_components/react/react.development.js"></script>
+    <script src="bower_components/react/react-dom.development.js"></script>
+    <script src="bower_components/babel/browser.js"></script>
+    <script type="text/babel">
+        function toUp(val) {
+            return val.toLowerCase();
+        }
+        
+
+        function Dates(date) {
+            let dates = date.getHours();
+            if(dates <= 12) {
+                return <a href="http://react.css88.com/">现在是上午时间，你该好好学习哦</a>;
+            }else if(dates <= 14) {
+                return <a href="https://v.qq.com/">现在是午休时间，好好享受吧</a>
+            }else if(dates <= 17) {
+                return <a href="http://server.apexgame.cn/">现在是下午上班时间，好好工作吧</a>
+            }else {
+                return <a href="https://www.taobao.com/">下班啦</a>
+            }
+        }
+        const user = {
+            firstName: 'Harper',
+            lastName: 'Perez'
+        }
+
+        const element = (
+            <div>
+                <p>{Dates(new Date())}</p>
+                <h1>Hello, {user.firstName.toUpperCase()}</h1>
+                <h2>now name is: {toUp(user.lastName)}</h2>
+            </div>
+        );
+
+       
+        ReactDOM.render(
+            element,
+            document.getElementById('root')
+        );
+   </script>
+</body>
+
+</html>
