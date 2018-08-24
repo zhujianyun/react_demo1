@@ -26,7 +26,7 @@
             componentDidMount(props) {
                 this.timeID = setInterval(() => {
                     this.tick();
-                    if(this.state.counter >= 100) {
+                    if(this.state.counter >= 100 - 2) {
                         return over = <p>好了 我累了 不想计算了</p>;
                     }
                     // 错误

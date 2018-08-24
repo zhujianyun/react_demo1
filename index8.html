@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习react8——列表(lists)和键值(keys)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+    </style>
+</head>
+
+<body id="body">
+    <div id="root"></div>
+    <div id="one"></div>
+    <div id="two"></div>
+    <script src="bower_components/react/react.development.js"></script>
+    <script src="bower_components/react/react-dom.development.js"></script>
+    <script src="bower_components/babel/browser.js"></script>
+    <script type="text/babel">
+        function NumberList(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((number, index) =>
+                <li key={index}>{number}</li>
+            );
+            return (
+                <ul>{listItems}</ul>
+            );
+        }
+
+        const numbers = [1, 2, 3, 4, 5];
+        ReactDOM.render(
+            <NumberList numbers={numbers} />,
+            document.getElementById('root')
+        );
+
+        function Blog(props) {
+            const sidebar = (
+                <ul>
+                    {props.posts.map( (x) => 
+                        <li key={x.id}>
+                            {x.title}
+                        </li>
+                    )}
+                </ul>
+            );
+            const content = props.posts.map( x => 
+                <div key={x.id}>
+                    <h3>{x.title}</h3>
+                    <p>{x.content}</p>
+                </div>
+            );
+            return (
+                <div>
+                    {sidebar}
+                    <hr />
+                    {content}
+                </div>
+            );
+        }
+        const posts = [
+        {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+        {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+        ];
+        ReactDOM.render(
+            <Blog  posts={posts}/>,
+            document.getElementById('one')
+        );
+    </script>
+</body>
+
+</html>

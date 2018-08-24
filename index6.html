@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习react6——处理事件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #body {
+            width: 100%;
+            height: 100vh;
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        .buttom {
+            margin: 10px 0;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="root"></div>
+    <div id="one"></div>
+    <div id="two"></div>
+    <script src="bower_components/react/react.development.js"></script>
+    <script src="bower_components/react/react-dom.development.js"></script>
+    <script src="bower_components/babel/browser.js"></script>
+    <script type="text/babel">
+       function ActionLink() {
+           function handleClick(e) {
+               e.preventDefault();
+               console.log('this link was clicked');
+           }
+
+           return (
+                <a href="#" onClick={handleClick}>
+                    Click me!
+                </a>
+           );
+       }
+
+       ReactDOM.render(
+           <ActionLink />,
+           document.getElementById('root')
+       );
+
+       class One extends React.Component {
+           constructor(props) {
+               super(props);
+               this.clickLink2 = this.clickLink2.bind(this);
+           }
+            clickLink1(e) {
+                e.preventDefault();
+                console.log('Replace return false! 111');
+            }
+            clickLink2(e) {
+                e.preventDefault();
+                console.log('Replace return false! 222');
+            }
+            render() {
+                return (
+                        <div>
+                            <a href="#" onClick={ (e) => this.clickLink1(e)}>
+                                I'm classComponents1, Click me!
+                            </a>
+                            <br/>
+                            <a href="#" onClick={this.clickLink2}>
+                                I'm classComponents2, Click me!
+                            </a>
+                        </div>
+                        
+                );
+            }
+        }
+       ReactDOM.render(
+           <One />,
+           document.getElementById('one')
+       );
+
+
+       class Toggle extends React.Component {
+           constructor(props) {
+               super(props);
+               this.state = {
+                   isToggleOn1: false,
+                   isToggleOn2: false
+               };
+               this.handleClick1 = this.handleClick1.bind(this);
+           }
+           handleClick1(e, ids) {
+               console.log('handleClick1', e, ids);
+               this.setState({
+                   isToggleOn1: !this.state.isToggleOn1
+               });
+
+               if(this.state.isToggleOn1) {
+                    document.getElementById('body').style.backgroundColor = '#ffffff'
+               }else {
+                    document.getElementById('body').style.backgroundColor = '#000000'
+               }
+           }
+
+            handleClick2(ids, e) {
+               console.log('handleClick1', e, ids);
+
+                this.setState({
+                   isToggleOn2: !this.state.isToggleOn2
+                });
+
+                if(this.state.isToggleOn2) {
+                    document.getElementById('body').style.border = '0px solid red'
+                }else {
+                    document.getElementById('body').style.border = '2px solid red'
+                }
+            }    
+
+           render() {
+               let ids = ['001', '002'];
+               return (
+                    <div>
+                        <button onClick={this.handleClick1.bind(this, ids[0])} className="buttom">
+                            {this.state.isToggleOn1 ? 'On1' : 'Off1'}
+                        </button>
+                        <br/>
+                        <button onClick={(e) => this.handleClick2(ids[1], e)} className="buttom">
+                            {this.state.isToggleOn2 ? 'On2' : 'Off2'}
+                        </button>
+                    </div>
+               );
+           }
+       }
+
+       ReactDOM.render(
+           <Toggle />,
+           document.getElementById('two')
+       );
+   </script>
+</body>
+
+</html>
